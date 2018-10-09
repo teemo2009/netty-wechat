@@ -23,8 +23,9 @@ public class NettyClient {
                     .handler(new ChannelInitializer<Channel>() {
                         @Override
                         protected void initChannel(Channel ch) {
-                            ch.pipeline().addLast(new MDecoder(Integer.MAX_VALUE,1,4,
-                                    2,1));
+                           /* ch.pipeline().addLast(new MDecoder(Integer.MAX_VALUE,1,4,
+                                    2,1));*/
+                            ch.pipeline().addLast(new MDecoder());
                             ch.pipeline().addLast(new MEncoder());
                             ch.pipeline().addLast(new SimpleChannelInboundHandler<IOBean>() {
                                 @Override

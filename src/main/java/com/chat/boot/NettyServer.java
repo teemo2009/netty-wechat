@@ -19,15 +19,16 @@ public class NettyServer {
         ServerBootstrap serverBootstrap = new ServerBootstrap();
 
         NioEventLoopGroup boss = new NioEventLoopGroup();
-        NioEventLoopGroup worker = new NioEventLoopGroup(10);
+        NioEventLoopGroup worker = new NioEventLoopGroup(5);
         serverBootstrap
                 .group(boss, worker)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
-                        ch.pipeline().addLast(new MDecoder(Integer.MAX_VALUE,1,4,
-                                2,1));
+                     /*   ch.pipeline().addLast(new MDecoder(Integer.MAX_VALUE,1,4,
+                                2,1));*/
+                        ch.pipeline().addLast(new MDecoder());
                         ch.pipeline().addLast(new MEncoder());
                         ch.pipeline().addLast(new FirstInServerHandle());
                        /* ch.pipeline().addLast(new SecondInServerHandle());

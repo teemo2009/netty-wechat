@@ -34,6 +34,7 @@ public class FirstInServerHandle extends  SimpleChannelInboundHandler<IOBean> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, IOBean msg) throws Exception {
-        log.info("{}==========={}",msg.getData(),atomicInteger.incrementAndGet());
+        log.info("{}==========={}",msg.getData().getBytes("UTF-8").length,
+                atomicInteger.incrementAndGet());
     }
 }
